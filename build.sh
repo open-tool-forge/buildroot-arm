@@ -15,4 +15,4 @@ cp -f ../$ARCH.config .config
 make HOSTCC=gcc-10 HOSTCXX=g++-10 -j`nproc` sdk
 popd
 
-tar -czf buildroot_$ARCH.tar.gz $BUILDROOT_VER/output/host
+mv $BUILDROOT_VER/output/images/${CROSS_TRIPLE}_sdk-buildroot.tar.gz buildroot_$ARCH.tar.gz
