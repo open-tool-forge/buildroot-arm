@@ -1,0 +1,29 @@
+stages:
+- stage: build_buildroot
+  displayName: Build buildroot
+  condition: always()
+  jobs:
+  - job: build_buildroot
+    displayName: Build buildroot
+    timeoutInMinutes: 0
+    strategy:
+      matrix:
+        armv7l:
+          ARCH: linux_armv7l
+    pool:
+      vmImage: ubuntu-16.04
+
+    container:
+      image: ubuntu:20.04
+      options: "--name ci-container -v /usr/bin/docker:/tmp/docker:ro"
+
+    steps:
+    - script: |
+        /tmp/docker exec -t -u 0 ci-container \
+        sh -c "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confold" -y install sudo"
+      displayName: Set up sudo
+    - bash: ./build.sh $(ARCH)
+      displayName: Build buildroot
+      name: build_buildroot
+    - publish: buildroot_$(ARCH).tar.gz
+      artifact: buildroot_$(ARCH)
