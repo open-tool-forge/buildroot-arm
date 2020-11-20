@@ -13,7 +13,7 @@ stages:
           CROSS_TRIPLE: arm-buildroot-linux-gnueabihf
         aarch64:
           ARCH: linux_aarch64
-          CROSS_TRIPLE: arm-buildroot-linux-gnueabihf
+          CROSS_TRIPLE: aarch64-buildroot-linux-gnu
     pool:
       vmImage: ubuntu-16.04
 
