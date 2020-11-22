@@ -8,6 +8,9 @@ stages:
     timeoutInMinutes: 0
     strategy:
       matrix:
+        armv6:
+          ARCH: linux_armv6
+          CROSS_TRIPLE: arm-buildroot-linux-gnueabihf
         armv7l:
           ARCH: linux_armv7l
           CROSS_TRIPLE: arm-buildroot-linux-gnueabihf
